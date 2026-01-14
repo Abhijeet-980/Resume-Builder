@@ -136,41 +136,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hero section button event handlers
     if (ctaCreateBtn) {
         ctaCreateBtn.addEventListener('click', function() {
-            document.getElementById('landing-section').classList.add('hidden');
-            document.getElementById('resume-section').classList.remove('hidden');
+            // Redirect to resume builder page instead of showing locally
+            window.location.href = './resume-builder.html';
         });
     }
     
     if (ctaDemoBtn) {
         ctaDemoBtn.addEventListener('click', function() {
-            // Show sample data in the form
-            document.getElementById('name').value = 'John Doe';
-            document.getElementById('email').value = 'john.doe@example.com';
-            document.getElementById('phone').value = '+1 (555) 123-4567';
-            document.getElementById('location').value = 'New York, NY';
-            document.getElementById('linkedin').value = 'linkedin.com/in/johndoe';
-            document.getElementById('summary').value = 'Experienced professional with expertise in software development and project management.';
-            document.getElementById('degree').value = 'Bachelor of Science in Computer Science';
-            document.getElementById('institution').value = 'University of Technology';
-            document.getElementById('year').value = '2020';
-            document.getElementById('cgpa').value = '3.8';
+            // Redirect to resume builder page with sample data in URL parameters
+            const sampleData = {
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+                phone: '+1 (555) 123-4567',
+                location: 'New York, NY',
+                linkedin: 'linkedin.com/in/johndoe',
+                summary: 'Experienced professional with expertise in software development and project management.',
+                degree: 'Bachelor of Science in Computer Science',
+                institution: 'University of Technology',
+                year: '2020',
+                cgpa: '3.8',
+                skills: ['JavaScript', 'React', 'Node.js', 'Project Management'],
+                expTitle: 'Software Engineer',
+                expOrg: 'Tech Solutions Inc.',
+                expDuration: 'Jan 2021 - Present',
+                expDesc: 'Developed and maintained web applications using modern technologies.',
+                achievements: 'Certified AWS Developer, Led team of 5 developers on major project'
+            };
             
-            // Add sample skills
-            skills = ['JavaScript', 'React', 'Node.js', 'Project Management'];
-            renderSkills();
+            // Store sample data in localStorage
+            localStorage.setItem('sampleResumeData', JSON.stringify(sampleData));
             
-            // Add sample experience
-            document.getElementById('exp-title').value = 'Software Engineer';
-            document.getElementById('exp-org').value = 'Tech Solutions Inc.';
-            document.getElementById('exp-duration').value = 'Jan 2021 - Present';
-            document.getElementById('exp-desc').value = 'Developed and maintained web applications using modern technologies.';
-            
-            document.getElementById('achievements').value = 'Certified AWS Developer, Led team of 5 developers on major project';
-            
-            // Update preview and show resume section
-            updatePreview();
-            document.getElementById('landing-section').classList.add('hidden');
-            document.getElementById('resume-section').classList.remove('hidden');
+            // Redirect to resume builder page
+            window.location.href = './resume-builder.html';
         });
     }
 
