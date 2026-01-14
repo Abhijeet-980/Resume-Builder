@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderSkills() {
         if (!skillsList) return;
         skillsList.innerHTML = skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+        
     }
 
     function updatePreview() {

@@ -1,7 +1,9 @@
 // auth.js - Handles simulated authentication, registration, login, logout, and session persistence
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const authSection = document.getElementById('auth-section');
+    const regcloseauthBtn = document.querySelector('.register-close-auth');
+    const logincloseauthBtn = document.querySelector(".login-colse-auth")
     const resumeSection = document.getElementById('resume-section');
     const landingSection = document.getElementById('landing-section');
     const registerForm = document.getElementById('register');
@@ -13,30 +15,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const topRegisterBtn = document.getElementById('show-register-top');
     const ctaBtn = document.getElementById('cta-create');
     const userNameEl = document.getElementById('user-name');
+    const nameErrorsms = document.getElementById('name-error-message');
+    const emailErrorSms = document.getElementById('email-error-message');
+    const passwordErrorSms = document.getElementById('password-error-message');
+    const downloadResumeBtn = document.getElementById('download-resume');
+    const nameRegex = /^[a-zA-Z\s]{2,}$/;
+    const emailRegx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 
     // Check for existing session on load
     const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        downloadResumeBtn.classList.add('hidden');
+    
+    }
     if (currentUser && getUserData(currentUser).session) {
+        downloadResumeBtn.classList.remove('hidden');
         showResumeSection();
     } else {
         showLanding();
     }
 
     // Toggle between register and login forms
-    showLogin.addEventListener('click', function(e) {
+    showLogin.addEventListener('click', function (e) {
         e.preventDefault();
         document.getElementById('register-form').classList.add('hidden');
         document.getElementById('login-form').classList.remove('hidden');
     });
 
-    showRegister.addEventListener('click', function(e) {
+    showRegister.addEventListener('click', function (e) {
         e.preventDefault();
         document.getElementById('login-form').classList.add('hidden');
         document.getElementById('register-form').classList.remove('hidden');
     });
 
     if (topLoginBtn) {
-        topLoginBtn.addEventListener('click', function(e) {
+        topLoginBtn.addEventListener('click', function (e) {
             e.preventDefault();
             showAuthSection();
             document.getElementById('register-form').classList.add('hidden');
@@ -44,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     if (topRegisterBtn) {
-        topRegisterBtn.addEventListener('click', function(e) {
+        topRegisterBtn.addEventListener('click', function (e) {
             e.preventDefault();
             showAuthSection();
             document.getElementById('login-form').classList.add('hidden');
@@ -52,10 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     if (ctaBtn) {
-        ctaBtn.addEventListener('click', function(){
+        ctaBtn.addEventListener('click', function () {
             const currentUser = localStorage.getItem('currentUser');
             if (currentUser && getUserData(currentUser)?.session) {
                 showResumeSection();
+
             } else {
                 showAuthSection();
             }
@@ -63,11 +78,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Register user
-    registerForm.addEventListener('submit', function(e) {
+
+    registerForm.addEventListener('submit', function (e) {
+
         e.preventDefault();
         const fullName = document.getElementById('reg-fullname').value;
         const email = document.getElementById('reg-email').value;
         const password = document.getElementById('reg-password').value;
+        console.log("password", password);
+
+        if (!fullName.trim()) {
+            nameErrorsms.textContent = "Name fields are required.";
+            return;
+        }
+        else if (fullName.length < 2) {
+            nameErrorsms.textContent = "Name must be at least 2 characters Long."
+        }
+        if (!nameRegex.test(fullName)) {
+            nameErrorsms.textContent = "Please enter a valid name..";
+            return;
+        }
+        else {
+            nameErrorsms.textContent = "";
+
+        }
+        if (!email.trim()) {
+            emailErrorSms.textContent = "Email is required";
+            return
+        }
+        else if (!emailRegx.test(email)) {
+            emailErrorSms.textContent = "Please enter a valid email";
+            return
+        }
+        else {
+            emailErrorSms.textContent = "";
+        }
+
+        if (!password.trim()) {
+            passwordErrorSms.textContent = "Password is required";
+            return
+        }
+        else if (!passwordRegex.test(password)) {
+            passwordErrorSms.textContent = "Please enter minimu 6 characters, at least one letter and one number.";
+            return
+        }
+        passwordErrorSms.textContent = "";
 
         if (getUserData(email)) {
             alert('User already exists!');
@@ -86,13 +141,20 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Registration successful! Please login.');
         showLogin.click();
     });
+    regcloseauthBtn.addEventListener("click", function () {
+        authSection.classList.add("hidden");
+        registerForm.reset();
+    })
+    logincloseauthBtn.addEventListener("click", function () {
+        authSection.classList.add("hidden");
+        loginForm.reset();
+    })
 
     // Login user
-    loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
-
         const userData = getUserData(email);
         if (userData && userData.password === password) {
             userData.session = true;
@@ -105,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Logout
-    logoutBtn.addEventListener('click', function() {
+    logoutBtn.addEventListener('click', function () {
         const currentUser = localStorage.getItem('currentUser');
         if (currentUser) {
             const userData = getUserData(currentUser);
@@ -151,3 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadUserData(); // Load resume and theme data
     }
 });
+
+
+
+
