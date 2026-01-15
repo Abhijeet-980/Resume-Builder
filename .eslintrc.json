@@ -5,6 +5,15 @@
     "node": true,
     "jest": true
   },
+  "globals": {
+    "Validator": "readonly",
+    "ValidationUI": "readonly",
+    "getUserData": "readonly",
+    "saveUserData": "readonly",
+    "loadUserData": "readonly",
+    "Sanitizer": "readonly",
+    "html2pdf": "readonly"
+  },
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": "latest",
