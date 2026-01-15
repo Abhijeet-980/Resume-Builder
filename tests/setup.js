@@ -16,10 +16,6 @@ global.localStorage = localStorageMock;
 // Reset all mocks before each test
 beforeEach(() => {
   jest.clearAllMocks();
-  localStorage.getItem.mockClear();
-  localStorage.setItem.mockClear();
-  localStorage.removeItem.mockClear();
-  localStorage.clear.mockClear();
 });
 
 // Suppress console errors in tests (optional)

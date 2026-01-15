@@ -13,10 +13,10 @@ const Sanitizer = {
       '<': '&lt;',
       '>': '&gt;',
       '"': '&quot;',
-      "'": '&#39;',
+      '\'': '&#39;',
       '/': '&#x2F;'
     };
-    return text.replace(/[&<>"'\/]/g, (char) => map[char]);
+    return text.replace(/[&<>"'/]/g, (char) => map[char]);
   },
 
   sanitizeURL: (url) => {
@@ -35,9 +35,12 @@ const Sanitizer = {
     if (typeof text !== 'string') {
       return '';
     }
+    if (!text) {
+      return '';
+    }
     const temp = document.createElement('div');
-    temp.textContent = text;
-    return temp.innerHTML;
+    temp.innerHTML = text;
+    return temp.textContent || temp.innerText || '';
   }
 };
 

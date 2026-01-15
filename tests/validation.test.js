@@ -17,7 +17,7 @@ const Validator = {
     if (typeof phone !== 'string') {
       return false;
     }
-    const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
+    const phoneRegex = /^[\d\s\-()+.]+$/;
     return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 7;
   },
 
@@ -25,9 +25,19 @@ const Validator = {
     if (typeof url !== 'string') {
       return false;
     }
+    if (!url) {
+      return false;
+    }
     try {
-      new URL(url);
-      return true;
+      // Block dangerous protocols
+      const dangerousProtocols = ['javascript:', 'data:', 'vbscript:', 'file:'];
+      const lowerUrl = url.toLowerCase();
+      if (dangerousProtocols.some(protocol => lowerUrl.startsWith(protocol))) {
+        return false;
+      }
+      // Check if it's a valid URL (requires protocol)
+      const urlPattern = /^(https?:\/\/)(\w+\.)+\w+/;
+      return urlPattern.test(url);
     } catch {
       return false;
     }

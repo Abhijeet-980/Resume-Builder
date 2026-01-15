@@ -17,7 +17,7 @@ const Sanitizer = (() => {
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;',
+    '\'': '&#39;',
     '/': '&#x2F;'
   };
 
@@ -33,7 +33,7 @@ const Sanitizer = (() => {
     if (typeof text !== 'string') {
       return '';
     }
-    return text.replace(/[&<>"'\/]/g, (char) => HTML_ESCAPE_MAP[char]);
+    return text.replace(/[&<>"'/]/g, (char) => HTML_ESCAPE_MAP[char]);
   };
 
   /**
@@ -100,15 +100,15 @@ const Sanitizer = (() => {
     if (typeof url !== 'string') {
       return '';
     }
-    
+
     const trimmedUrl = url.trim().toLowerCase();
-    
+
     // Block dangerous protocols
     const dangerousProtocols = ['javascript:', 'data:', 'vbscript:'];
     if (dangerousProtocols.some((protocol) => trimmedUrl.startsWith(protocol))) {
       return '';
     }
-    
+
     return url;
   };
 
@@ -138,7 +138,7 @@ const Sanitizer = (() => {
     if (typeof phone !== 'string') {
       return false;
     }
-    const phoneRegex = /^[\d\s\-\+\(\)\.]+$/;
+    const phoneRegex = /^[\d\s\-+().\]]+$/;
     return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 7;
   };
 
@@ -155,8 +155,8 @@ const Sanitizer = (() => {
       return '';
     }
     const temp = document.createElement('div');
-    temp.textContent = text;
-    return temp.innerHTML;
+    temp.innerHTML = text;
+    return temp.textContent || temp.innerText;
   };
 
   /**
