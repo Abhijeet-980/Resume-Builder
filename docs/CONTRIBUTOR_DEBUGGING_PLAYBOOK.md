@@ -2,6 +2,16 @@
 
 > A developer-first guide for troubleshooting common issues in Resume-Builder :)
 
+---
+
+**📌 Quick Navigation:**
+- 🚀 **Getting Started?** → [DEVELOPMENT.md](../DEVELOPMENT.md)
+- 👥 **How to Contribute?** → [CONTRIBUTION.md](../CONTRIBUTION.md)  
+- 🐛 **Debugging Issues?** → You are here!
+- ❓ **Project Overview?** → [README.md](../README.md)
+
+---
+
 This playbook documents common development issues, debugging workflows, and troubleshooting steps to help new and existing contributors quickly identify and fix problems while working on the Resume-Builder project.
 
 ## Table of Contents
