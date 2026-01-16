@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <!-- scroll up icon -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +22,8 @@
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
       <!-- style css -->
       <link rel="stylesheet" type="text/css" href="css/style.css">
+      <!-- Additional styles for auth components -->
+      <link rel="stylesheet" type="text/css" href="./resume-style.css">
       <!-- Responsive-->
       <link rel="stylesheet" href="css/responsive.css">
       <!-- fevicon -->
@@ -33,6 +37,13 @@
 
    </head>
    <body>
+      <!-- Scroll up btn -->
+      <button id="up-btn">
+         <i class="fa-solid fa-chevron-up"></i>
+      </button>
+      <!-- up-btn js file -->
+      <script src="up-btn.js"></script>
+
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -62,14 +73,14 @@
                            <li><a href="./login.html" id="show-login-top">Sign In</a></li>
                         </ul>
                      </div>
-                     <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+                     <div id="profile-dropdown" class="profile-dropdown hidden">
                         <button class="profile-btn">
                            <i class="fa fa-user" aria-hidden="true"></i>
                            <i class="fa fa-caret-down" aria-hidden="true"></i>
                         </button>
                         <div class="dropdown-content" id="dropdown-menu">
                            <div class="dropdown-item user-info" id="user-name"></div>
-                           <a href="#" class="dropdown-item" id="profile-link">Profile</a>
+                           <a href="./edit-profile.html" class="dropdown-item" id="edit-profile-link">Edit Profile</a>
                            <a href="#" class="dropdown-item" id="settings-link">Settings</a>
                            <a href="#" class="dropdown-item" id="logout">Logout</a>
                         </div>
@@ -77,8 +88,7 @@
                   </form>
                </div>
             </nav>
-         </div>
-         
+
          <!-- banner section start --> 
          <div class="banner_section layout_padding">
             <div class="container">
@@ -104,7 +114,6 @@
          <!-- banner section end -->
       </div>
       <!-- header section end -->
-      
       <!-- services section start -->
       <div class="services_section layout_padding">
          <div class="container">
@@ -143,7 +152,7 @@
       </div>
       <!-- services section end -->
       <!-- shop section start -->
-      <div class="blog_section layout_padding">
+      <div id="templates" class="blog_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -189,7 +198,7 @@
             <div class="row">
                <div class="col-md-6 padding_left0">
                   <div class="about_taital_main">
-                     <h1 class="about_taital">About ResumeCraft</h1>
+                     <h1 class="about_taital">About ResumeBuilder</h1>
                      <h6 class="about_text">READY TO CREATE YOUR PERFECT RESUME?</h6>
                      <div class="btn_main">
                         <div class="started_bt"><a href="resume-builder.html">Start Building</a></div>
@@ -205,7 +214,7 @@
       </div>
       <!-- about section end -->
       <!-- pricing section start -->
-      <div class="pricing_section layout_padding">
+      <div id="pricing" class="pricing_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -409,8 +418,8 @@
             <p class="copyright_text">2026 ResumeBuilder. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
          </div>
       </div>
+      
       <!-- copyright section end -->
-      <!-- Javascript files-->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.bundle.min.js"></script>
@@ -425,117 +434,33 @@
       <script src="auth.js"></script>
       <script src="theme.js"></script>
       <script>
-         // Material Select Initialization
+         // Initialize auth UI on page load
          $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         
-         // Initialize carousels with more robust settings
-         if ($('#main_slider').length > 0) {
-             $('#main_slider').carousel({
-                 interval: 5000,
-                 pause: false
+             updateAuthUI();
+             $('.mdb-select').materialSelect();
+             $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+             $(this).closest('.select-outline').find('label').toggleClass('active');
+             $(this).closest('.select-outline').find('.caret').toggleClass('active');
              });
-         }
-         
-         if ($('#my_slider').length > 0) {
-             $('#my_slider').carousel({
-                 interval: 6000,
-                 pause: false
-             });
-         }
-         
-         // Initialize auth UI for index page
-         updateAuthUI();
-         
-         // Intercept resume builder links to check authentication
-         document.querySelectorAll('a[href*="resume-builder.html"]').forEach(link => {
-             link.addEventListener('click', function(e) {
-                 const currentUser = localStorage.getItem('currentUser');
-                 if (!currentUser) {
-                     e.preventDefault();
-                     window.location.href = './login.html';
-                 }
-             });
-         });
-         
-         // Toggle dropdown menu
-         const profileBtn = document.querySelector('.profile-btn');
-         if (profileBtn) {
-             profileBtn.addEventListener('click', function (e) {
-                 e.preventDefault();
-                 const dropdown = document.getElementById('dropdown-menu');
-                 dropdown.classList.toggle('show');
-             });
-         }
-
-         // Close dropdown when clicking outside
-         document.addEventListener('click', function (event) {
-             const dropdown = document.getElementById('dropdown-menu');
-             const profileBtn = document.querySelector('.profile-btn');
-
-             if (dropdown && profileBtn) {
-                 if (!profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
-                     dropdown.classList.remove('show');
-                 }
-             }
-         });
-
-         // Logout functionality
-         const logoutBtn = document.getElementById('logout');
-         if (logoutBtn) {
-             logoutBtn.addEventListener('click', function (e) {
-                 e.preventDefault();
-                 localStorage.removeItem('currentUser');
-                 updateAuthUI();
-                 // Optionally redirect to home or show a message
-                 ValidationUI.showToast('Logged out successfully', 'info');
-             });
-         }
-         
-         // Update auth UI based on login status
-         function updateAuthUI() {
-             const currentUser = localStorage.getItem('currentUser');
-
-             // Ensure both elements exist before manipulating them
-             const authControls = document.getElementById('auth-controls');
-             const profileDropdown = document.getElementById('profile-dropdown');
              
-             if (currentUser && getUserData(currentUser)) {
-                 // User is logged in
-                 if (authControls) {
-                     authControls.classList.add('hidden');
-                     authControls.style.display = 'none';
-                 }
-                 if (profileDropdown) {
-                     profileDropdown.classList.remove('hidden');
-                     profileDropdown.style.display = 'block';
-                     
-                     // Set user name in dropdown
-                     const userData = getUserData(currentUser);
-                     const displayName = userData?.profile?.fullname || userData?.profile?.email || currentUser;
-                     const userNameElement = document.getElementById('user-name');
-                     if (userNameElement) userNameElement.textContent = displayName;
-                 }
-             } else {
-                 // User is not logged in
-                 if (authControls) {
-                     authControls.classList.remove('hidden');
-                     authControls.style.display = 'block';
-                 }
-                 if (profileDropdown) {
-                     profileDropdown.classList.add('hidden');
-                     profileDropdown.style.display = 'none';
-                 }
+             // Initialize carousels with more robust settings
+             if ($('#main_slider').length > 0) {
+                 $('#main_slider').carousel({
+                     interval: 5000,
+                     pause: false
+                 });
              }
-         }
+             
+             if ($('#my_slider').length > 0) {
+                 $('#my_slider').carousel({
+                     interval: 6000,
+                     pause: false
+                 });
+             }
+         });
          
 
-         
-         });
       </script>
+   <script src="auth-ui.js"></script>
    </body>
 </html>
