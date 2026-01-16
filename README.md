@@ -1,56 +1,40 @@
-# 📝 Resume Builder – Local Web Application
+# 🚀 Resume Builder
 
-A clean, modern, and fully frontend **Resume Builder web application** that enables users to create professional, ATS-friendly resumes with a **live preview** and **local data persistence** — built using **only HTML, CSS, and Vanilla JavaScript**.
+A modern, responsive **Resume Builder web application** that allows users to create clean, professional, and ATS-friendly resumes directly in the browser. The app focuses on simplicity, usability, and privacy — no backend or database required.
 
-This project is designed to demonstrate:
-- Strong frontend fundamentals  
-- Clean UI/UX thinking  
-- Modular and production-ready architecture  
-- Framework-free development  
+**Live Demo:** https://resume-builder-ashy-eight.vercel.app/
+
+![Resume Builder](https://img.shields.io/badge/HTML-CSS-JavaScript-orange?style=for-the-badge)
+![Deployment](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+---
 
 ## ✨ Features
 
+### 🛠️ Resume Creation
+- Form-based input for personal details, education, experience, and skills
+- Real-time resume preview while typing
+- Clean and professional resume layout
+- Browser-based data handling (no backend required)
 
-- 📄 Structured resume input form  
-- 🔄 Live resume preview  
-- 💾 Auto-save per user (local storage)  
-- 🎨 Theme support (light/dark mode ready)  
-- 🖨️ Print-friendly resume layout  
-- 🧩 Modular JavaScript architecture  
+### 🎨 UI & Experience
+- Fully responsive design (desktop, tablet, mobile)
+- Simple and intuitive user interface
+- Print-ready resume layout
+- Privacy-friendly — data stays in the browser
 
-### Resume Sections
 ---
-- Personal Information  
-- Professional Summary  
-- Education  
-- Skills  
-- Experience / Projects  
-- Achievements / Certifications  
 
-Each section updates the resume in real time and persists data locally.
+## 🧰 Tech Stack
 
+- **HTML5** – Structure
+- **CSS3** – Styling & layout
+- **JavaScript (Vanilla)** – Logic & interactivity
+- **Deployment** – Vercel
 
-## 🧱 Project Architecture
+---
 
-The application follows a **modular, separation-of-concerns architecture** where each JavaScript file handles a specific responsibility:
-
-```
-
-User Input (Form)
-│
-▼
-resume.js ───────────► Live Preview Renderer
-│
-▼
-storage.js ──────────► Local Storage Persistence
-│
-▼
-auth.js ─────────────► Frontend User Handling
-│
-▼
-theme.js ────────────► Theme & UI Preferences
-
-```
 
 ### Architectural Flow
 ---
@@ -68,39 +52,94 @@ This structure ensures:
 - Scalability for future features  
 - Clean debugging and testing  
 
+---
 
+## 🚀 Getting Started
 
-## 📂 Project Structure
+### Prerequisites
+- Any modern web browser
+- Git (optional)
 
-```
+### Installation
 
-├── index.html
-├── style.css
-├── auth.js
-├── resume.js
-├── storage.js
-├── theme.js
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/stutitiwari23/Resume-Builder.git
+   cd Resume-Builder
+2. Run the project
+
+ Simply open index.html in your browser
+
+OR
+
+npx http-server .
+
+Then visit http://localhost:8080
+
+---
+
+## Project Structure
+
+Resume-Builder/
+├── css/                # Stylesheets
+├── images/             # Icons and images
+├── docs/               # Documentation
+├── tests/              # Test files
+├── index.html          # Main landing page
+├── resume-builder.html # Resume builder page
+├── login.html          # Login page
+├── register.html       # Registration page
+├── style.css           # Global styles
+├── resume.js           # Resume logic
+├── sanitizer.js        # Input sanitization
 └── README.md
 
-```
-## 🛠️ Tech Stack
+## Hinghlights ⭐
 
+ * Instant resume preview
 
-- **HTML5** – Semantic structure  
-- **CSS3** – Responsive layout, theming, and print styles  
-- **Vanilla JavaScript** – DOM manipulation, state management, and storage  
+* Clean, ATS-friendly formatting
 
+* No account or backend needed
 
-## ⚠️ Limitations
+* Lightweight and fast
 
+* Beginner-friendly codebase
 
-- Authentication is frontend-only  
-- Data is stored per browser/device  
-- No cloud sync or multi-device support  
+# 🤝 Contributing
 
-These constraints are intentional to keep the project framework-free and focused on frontend architecture.
+Thanks for your interest in contributing to **Resume Builder**!  
+All contributions — bug fixes, features, UI improvements, and documentation — are welcome.
 
+## 🚀 Quick Start
 
+1. **Fork & Clone**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/Resume-Builder.git
+   cd Resume-Builder
+2. **Create a Branch**
+   
+  git checkout -b feature/your-feature-name
+
+ * Use meaningful branch names like:
+
+ * feature/add-pdf-export
+
+# 📜 Code of Conduct
+
+We are committed to providing a welcoming and inclusive environment for everyone contributing to **Resume Builder**.
+
+## 🤝 Our Standards
+
+Please:
+- Be respectful and kind
+- Give constructive feedback
+- Respect different viewpoints and experiences
+
+Unacceptable behavior includes:
+- Harassment or discrimination
+- Trolling or insulting comments
+- Any form of abusive behavior
 
 ## 👩‍💻 Author
 
@@ -110,8 +149,13 @@ Bachelor of Computer Applications (BCA), 2025
 Frontend Development | UI/UX | Web Applications  
 
 
-## 📜 License
+## 🚨 Enforcement
 
+Project maintainers have the right to remove or edit contributions that violate this code of conduct.
 
-This project is open-source and free to use for learning and portfolio purposes.
+---
+
+By participating in this project, you agree to follow this Code of Conduct.
+
+Thank you for helping keep this community respectful and welcoming ❤️
 
