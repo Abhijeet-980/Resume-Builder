@@ -1321,60 +1321,87 @@ button {
 
 /* Testimonial Cards Styling */
 .customer_cards_row {
-    padding: 40px 0;
+    padding: 60px 0;
+    background: linear-gradient(180deg, #9bb0c5, #ffffff);
 }
 
 .testimonial_card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 25px;
-    margin: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #fafafa;
+    border-radius: 16px;
+    padding: 30px 25px;
+    margin: 20px 10;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
     transition: all 0.3s ease;
     height: 100%;
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .testimonial_card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.877);
+}
+
+/* Decorative Quote Icon */
+.testimonial_card::before {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 70px;
+    color: rgba(27, 190, 169, 0.1);
+    font-family: serif;
 }
 
 .customer_icon_wrapper {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    background-color: #28454e;
-    margin: 0 auto 15px;
+    background: linear-gradient(135deg, #28544e, #3d8b82);
+    margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.966);
+    transition: transform 0.3s ease;
 }
 
 .customer_icon_wrapper i {
-    font-size: 36px;
+    font-size: 38px;
     color: #ffffff;
 }
 
 .customer_name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #28454e;
-    margin: 10px 0 5px;
+    margin: 10px 0 4px;
 }
 
 .web_text {
-    font-size: 16px;
-    color: #666;
-    margin: 0 0 15px;
+    font-size: 15px;
+    color: #220000;
+    margin-bottom: 15px;
     font-style: italic;
 }
 
 .testimonial_text {
-    font-size: 15px;
-    color: #444;
-    line-height: 1.5;
+    font-size: 16px;
+    color: #270000;
+    line-height: 1.7;
     margin: 0;
+    padding: 0 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .testimonial_card {
+        margin-bottom: 30px;
+    }
+
+    .testimonial_text {
+        font-size: 15px;
+    }
 }
 
 /* contact section start */
