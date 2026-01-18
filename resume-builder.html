@@ -185,42 +185,42 @@
                             </div>
                             <article id="resume-preview">
 
-  <header class="preview-header">
-    <h1 id="preview-name"></h1>
-    <div class="preview-contact">
-      <span id="preview-email"></span> |
-      <span id="preview-phone"></span> |
-      <span id="preview-location"></span><br>
-      <span id="preview-linkedin"></span> |
-      <span id="preview-github"></span>
-    </div>
-  </header>
+                                <header class="preview-header">
+                                    <h1 id="preview-name"></h1>
+                                    <div class="preview-contact">
+                                        <span id="preview-email"></span> |
+                                        <span id="preview-phone"></span> |
+                                        <span id="preview-location"></span><br>
+                                        <span id="preview-linkedin"></span> |
+                                        <span id="preview-github"></span>
+                                    </div>
+                                </header>
 
-  <section class="preview-section-block" data-section="summary" draggable="true">
-    <h2>Professional Summary</h2>
-    <p id="preview-summary"></p>
-  </section>
+                                <section class="preview-section-block" data-section="summary" draggable="true">
+                                    <h2>Professional Summary</h2>
+                                    <p id="preview-summary"></p>
+                                </section>
 
-  <section class="preview-section-block" data-section="education" draggable="true">
-    <h2>Education</h2>
-    <p id="preview-education"></p>
-  </section>
+                                <section class="preview-section-block" data-section="education" draggable="true">
+                                    <h2>Education</h2>
+                                    <p id="preview-education"></p>
+                                </section>
 
-  <section class="preview-section-block" data-section="skills" draggable="true">
-    <h2>Skills</h2>
-    <div id="preview-skills"></div>
-  </section>
+                                <section class="preview-section-block" data-section="skills" draggable="true">
+                                    <h2>Skills</h2>
+                                    <div id="preview-skills"></div>
+                                </section>
 
-  <section class="preview-section-block" data-section="experience" draggable="true">
-    <h2>Experience / Projects</h2>
-    <div id="preview-experience"></div>
-  </section>
+                                <section class="preview-section-block" data-section="experience" draggable="true">
+                                    <h2>Experience / Projects</h2>
+                                    <div id="preview-experience"></div>
+                                </section>
 
-  <section class="preview-section-block" data-section="achievements" draggable="true">
-    <h2>Achievements / Certifications</h2>
-    <p id="preview-achievements"></p>
-  </section>
-</article>
+                                <section class="preview-section-block" data-section="achievements" draggable="true">
+                                    <h2>Achievements / Certifications</h2>
+                                    <p id="preview-achievements"></p>
+                                </section>
+                            </article>
 
 
                         </div>
@@ -589,95 +589,95 @@
 
             /* ===== Resume Section Reordering (Drag & Drop) ===== */
 
-const previewContainer = document.getElementById("resume-preview");
-let draggedSection = null;
+            const previewContainer = document.getElementById("resume-preview");
+            let draggedSection = null;
 
-function initSectionDragAndDrop() {
-    const sections = previewContainer.querySelectorAll(".preview-section-block");
+            function initSectionDragAndDrop() {
+                const sections = previewContainer.querySelectorAll(".preview-section-block");
 
-    sections.forEach(section => {
+                sections.forEach(section => {
 
-        section.addEventListener("dragstart", () => {
-            draggedSection = section;
-            section.classList.add("dragging");
-        });
+                    section.addEventListener("dragstart", () => {
+                        draggedSection = section;
+                        section.classList.add("dragging");
+                    });
 
-        section.addEventListener("dragend", () => {
-            section.classList.remove("dragging");
-            draggedSection = null;
-            saveSectionOrder();
-        });
+                    section.addEventListener("dragend", () => {
+                        section.classList.remove("dragging");
+                        draggedSection = null;
+                        saveSectionOrder();
+                    });
 
 
 
-        previewContainer.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    const afterElement = getDragAfterElement(previewContainer, e.clientY);
-    if (!draggedSection) return;
+                    previewContainer.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        const afterElement = getDragAfterElement(previewContainer, e.clientY);
+                        if (!draggedSection) return;
 
-    if (afterElement == null) {
-        previewContainer.appendChild(draggedSection);
-    } else {
-        previewContainer.insertBefore(draggedSection, afterElement);
-    }
-});
+                        if (afterElement == null) {
+                            previewContainer.appendChild(draggedSection);
+                        } else {
+                            previewContainer.insertBefore(draggedSection, afterElement);
+                        }
+                    });
 
-        section.addEventListener("dragleave", () => {
-            section.classList.remove("drag-over");
-        });
+                    section.addEventListener("dragleave", () => {
+                        section.classList.remove("drag-over");
+                    });
 
-        section.addEventListener("drop", () => {
-            section.classList.remove("drag-over");
-        });
-    });
-    
-}
+                    section.addEventListener("drop", () => {
+                        section.classList.remove("drag-over");
+                    });
+                });
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [
-        ...container.querySelectorAll(".preview-section-block:not(.dragging)")
-    ];
-
-    return draggableElements.reduce(
-        (closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
             }
-        },
-        { offset: Number.NEGATIVE_INFINITY }
-    ).element;
-}
+
+            function getDragAfterElement(container, y) {
+                const draggableElements = [
+                    ...container.querySelectorAll(".preview-section-block:not(.dragging)")
+                ];
+
+                return draggableElements.reduce(
+                    (closest, child) => {
+                        const box = child.getBoundingClientRect();
+                        const offset = y - box.top - box.height / 2;
+                        if (offset < 0 && offset > closest.offset) {
+                            return { offset: offset, element: child };
+                        } else {
+                            return closest;
+                        }
+                    },
+                    { offset: Number.NEGATIVE_INFINITY }
+                ).element;
+            }
 
 
-/* Save order */
-function saveSectionOrder() {
-    const order = [];
-    previewContainer.querySelectorAll(".preview-section-block").forEach(section => {
-        order.push(section.dataset.section);
-    });
-    localStorage.setItem("resumeSectionOrder", JSON.stringify(order));
-}
+            /* Save order */
+            function saveSectionOrder() {
+                const order = [];
+                previewContainer.querySelectorAll(".preview-section-block").forEach(section => {
+                    order.push(section.dataset.section);
+                });
+                localStorage.setItem("resumeSectionOrder", JSON.stringify(order));
+            }
 
-/* Load order */
-function loadSectionOrder() {
-    const savedOrder = JSON.parse(localStorage.getItem("resumeSectionOrder"));
-    if (!savedOrder) return;
+            /* Load order */
+            function loadSectionOrder() {
+                const savedOrder = JSON.parse(localStorage.getItem("resumeSectionOrder"));
+                if (!savedOrder) return;
 
-    savedOrder.forEach(key => {
-        const section = previewContainer.querySelector(
-            `.preview-section-block[data-section="${key}"]`
-        );
-        if (section) previewContainer.appendChild(section);
-    });
-}
+                savedOrder.forEach(key => {
+                    const section = previewContainer.querySelector(
+                        `.preview-section-block[data-section="${key}"]`
+                    );
+                    if (section) previewContainer.appendChild(section);
+                });
+            }
 
-/* Initialize */
-loadSectionOrder();
-initSectionDragAndDrop();
+            /* Initialize */
+            loadSectionOrder();
+            initSectionDragAndDrop();
 
 
         });
@@ -709,6 +709,7 @@ initSectionDragAndDrop();
                                 <li><a href="resume-builder.html" class="footer_link">Resume Builder</a></li>
                                 <li><a href="#templates" class="footer_link">Resume Templates</a></li>
                                 <li><a href="#pricing" class="footer_link">Pricing</a></li>
+                                <li><a href="contact-us.html" class="footer_link">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -738,7 +739,8 @@ initSectionDragAndDrop();
                             </div>
                             <div class="contact_item">
                                 <i class="fa fa-envelope contact_icon" aria-hidden="true"></i>
-                                <a href="mailto:support@resumebuilder.com" class="contact_link">support@resumebuilder.com</a>
+                                <a href="mailto:support@resumebuilder.com"
+                                    class="contact_link">support@resumebuilder.com</a>
                             </div>
                             <div class="contact_item">
                                 <i class="fa fa-comments contact_icon" aria-hidden="true"></i>
@@ -753,11 +755,16 @@ initSectionDragAndDrop();
                         <p class="footer_description">Stay updated with career tips and resume advice</p>
                         <nav class="social_links" aria-label="Social Media">
                             <ul class="social_list">
-                                <li><a href="#" class="social_link" aria-label="Follow us on Facebook" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="social_link social_link--twitter" aria-label="Follow us on Twitter" title="Twitter">𝕏</a></li>
-                                <li><a href="#" class="social_link" aria-label="Follow us on LinkedIn" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="social_link" aria-label="Follow us on Instagram" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="social_link" aria-label="Follow us on YouTube" title="YouTube"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on Facebook"
+                                        title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link social_link--twitter"
+                                        aria-label="Follow us on Twitter" title="Twitter">𝕏</a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on LinkedIn"
+                                        title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on Instagram"
+                                        title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on YouTube" title="YouTube"><i
+                                            class="fa fa-youtube" aria-hidden="true"></i></a></li>
                             </ul>
                         </nav>
                     </div>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- scroll up icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- site metas -->
+    <title>Contact Us - Resume Builder</title>
+    <meta name="keywords" content="contact, support, resume builder, feedback">
+    <meta name="description"
+        content="Contact the Resume Builder team for support, feedback, or contribution questions.">
+    <meta name="author" content="ResumeCraft">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- Additional styles for auth components -->
+    <link rel="stylesheet" type="text/css" href="./resume-style.css">
+
+    <!-- Responsive -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif">
+
+    <!-- font css -->
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+
+    <!-- Inline styles (icon alignment only) -->
+    <style>
+        /* Footer social icon alignment fix */
+        .social_icon ul {
+            display: flex;
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social_icon ul li {
+            list-style: none;
+        }
+
+        .social_icon ul li a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #ffffff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #0d2c3d;
+            font-size: 18px;
+        }
+
+        .social_icon ul li a i {
+            line-height: 1;
+        }
+
+        /* Contact Page Specific Styles */
+        .contact_page_section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 50%, #ffffff 100%);
+            min-height: calc(100vh - 400px);
+        }
+
+        .contact_page_container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact_page_header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .contact_page_header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #0d2c3d;
+            margin-bottom: 15px;
+        }
+
+        .contact_page_header p {
+            color: #6c757d;
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact_flex_layout {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        @media (max-width: 991px) {
+            .contact_flex_layout {
+                flex-direction: column;
+            }
+        }
+
+        .contact_info_sidebar {
+            flex: 0 0 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (max-width: 991px) {
+            .contact_info_sidebar {
+                flex: 1;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .contact_info_sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact_info_card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .contact_info_card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: #12b886;
+        }
+
+        .contact_info_card .icon_wrapper {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .contact_info_card .icon_wrapper i {
+            font-size: 1.4rem;
+            color: #0d2c3d;
+        }
+
+        .contact_info_card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0d2c3d;
+            margin-bottom: 8px;
+        }
+
+        .contact_info_card p,
+        .contact_info_card a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .contact_info_card a:hover {
+            color: #12b886;
+        }
+
+        .contact_form_main {
+            flex: 1;
+        }
+
+        .contact_form_card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            height: 100%;
+        }
+
+        .contact_form_card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0d2c3d;
+            margin-bottom: 30px;
+        }
+
+        .contact_form_card .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact_form_card label {
+            font-weight: 600;
+            color: #0d2c3d;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .contact_form_card .required-star {
+            color: #dc3545;
+        }
+
+        .contact_form_card .form-control {
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact_form_card .form-control:focus {
+            border-color: #12b886;
+            box-shadow: 0 0 0 4px rgba(18, 184, 134, 0.15);
+        }
+
+        .contact_form_card .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .contact_form_card textarea.form-control {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .contact_form_card .btn-submit {
+            background: linear-gradient(135deg, #12b886, #0ca678);
+            color: #ffffff;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .contact_form_card .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(18, 184, 134, 0.3);
+        }
+
+        .contact_form_card .btn-submit:disabled {
+            background: #adb5bd;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Spinner Styles */
+        .spinner-border {
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            vertical-align: text-bottom;
+            border: 0.2em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spinner-border {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .d-none {
+            display: none !important;
+        }
+
+        #formStatus {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        #formStatus.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #formStatus.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll up btn -->
+    <button id="up-btn">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- up-btn js file -->
+    <script src="up-btn.js"></script>
+
+    <!-- header section start -->
+    <div class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="index.html">
+                    <span class="logo-text">Resume Builder</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="resume-builder.html">Resume Builder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#templates">Templates</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#pricing">Pricing</a>
+                        </li>
+                    </ul>
+
+                    <form class="form-inline my-2 my-lg-0">
+                        <button type="button" id="theme-toggle" style="
+                           background: none;
+                           border: 1px solid #ddd;
+                           border-radius: 50%;
+                           width: 40px;
+                           height: 40px;
+                           cursor: pointer;
+                           margin-right: 15px;
+                           display: flex;
+                           align-items: center;
+                           justify-content: center;
+                           transition: all 0.2s ease;
+                        ">
+                            <span class="theme-sun" style="display: block;">☀️</span>
+                            <span class="theme-moon" style="display: none;">🌙</span>
+                        </button>
+
+                        <div id="auth-controls">
+                            <ul>
+                                <li>
+                                    <a href="./sign-up.html" id="show-register-top">Sign Up</a>
+                                </li>
+                                <li>
+                                    <a href="./sign-in.html" id="show-login-top">Sign In</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="profile-dropdown" class="profile-dropdown hidden">
+                            <button class="profile-btn">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </button>
+
+                            <div class="dropdown-content" id="dropdown-menu">
+                                <div class="dropdown-item user-info" id="user-name"></div>
+                                <a href="./edit-profile.html" class="dropdown-item" id="edit-profile-link">
+                                    Edit Profile
+                                </a>
+                                <a href="#" class="dropdown-item" id="settings-link">Settings</a>
+                                <a href="#" class="dropdown-item" id="logout">Logout</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- header section end -->
+
+    <!-- Contact Page Section -->
+    <section class="contact_page_section">
+        <div class="container">
+            <div class="contact_page_container">
+                <div class="contact_page_header">
+                    <h1>Contact Us</h1>
+                    <p>Have questions, feedback, or need support? We'd love to hear from you. Our team typically
+                        responds
+                        within 2-3 business days.</p>
+                </div>
+
+                <div class="contact_flex_layout">
+                    <!-- Left Sidebar with Info Boxes -->
+                    <div class="contact_info_sidebar">
+                        <div class="contact_info_card">
+                            <div class="icon_wrapper">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <h3>Email Us</h3>
+                            <a href="mailto:support@resumebuilder.com">support@resumebuilder.com</a>
+                        </div>
+                        <div class="contact_info_card">
+                            <div class="icon_wrapper">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <h3>Call Us</h3>
+                            <a href="tel:+91XXXXXXXXXX">+91 XXXXXXXXXX</a>
+                        </div>
+                        <div class="contact_info_card">
+                            <div class="icon_wrapper">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                            <h3>Live Chat</h3>
+                            <p>Available Mon-Fri, 9am-6pm</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Form section -->
+                    <div class="contact_form_main">
+                        <div class="contact_form_card">
+                            <h2>Send Us a Message</h2>
+                            <form id="contactForm" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" id="name" name="name" class="form-control"
+                                                placeholder="Your Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email <span class="required-star">*</span></label>
+                                            <input type="email" id="email" name="email" class="form-control"
+                                                placeholder="your@email.com" required>
+                                            <div class="invalid-feedback">Please provide a valid email address.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" name="subject" class="form-control"
+                                        placeholder="How can we help?">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message <span class="required-star">*</span></label>
+                                    <textarea id="message" name="message" class="form-control" rows="5"
+                                        placeholder="Your message here..." required></textarea>
+                                    <div class="invalid-feedback">Please enter your message.</div>
+                                </div>
+
+                                <!-- Honeypot Field (hidden) -->
+                                <div style="position: absolute; left: -9999px;">
+                                    <label for="website">Leave this field empty</label>
+                                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                                </div>
+
+                                <button type="submit" id="submitBtn" class="btn-submit">
+                                    <div class="spinner-border d-none" role="status"></div>
+                                    <span class="btn-text">Send Message</span>
+                                </button>
+
+                                <div id="formStatus" aria-live="polite"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer section start -->
+    <footer class="footer_section" role="contentinfo" aria-label="Site Footer">
+        <div class="container">
+            <!-- Footer Brand -->
+            <div class="footer_brand">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer_logo">
+                            <h2 class="footer_brand_title">RESUME BUILDER</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Content Grid -->
+            <div class="footer_content">
+                <div class="row">
+                    <!-- Column 1: Quick Links -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 footer_col">
+                        <h3 class="footer_heading">Quick Links</h3>
+                        <nav class="footer_nav" aria-label="Quick Links">
+                            <ul class="footer_menu">
+                                <li><a href="index.html" class="footer_link">Home</a></li>
+                                <li><a href="resume-builder.html" class="footer_link">Resume Builder</a></li>
+                                <li><a href="index.html#templates" class="footer_link">Resume Templates</a></li>
+                                <li><a href="index.html#pricing" class="footer_link">Pricing</a></li>
+                                <li><a href="contact-us.html" class="footer_link">Contact Us</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Column 2: Resume Help -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 footer_col">
+                        <h3 class="footer_heading">Resume Help</h3>
+                        <nav class="footer_nav" aria-label="Resume Resources">
+                            <ul class="footer_menu">
+                                <li><a href="#guide" class="footer_link">Resume Writing Guide</a></li>
+                                <li><a href="#cover-letter" class="footer_link">Cover Letter Tips</a></li>
+                                <li><a href="#interview" class="footer_link">Interview Preparation</a></li>
+                                <li><a href="#job-search" class="footer_link">Job Search Strategies</a></li>
+                                <li><a href="#linkedin" class="footer_link">LinkedIn Optimization</a></li>
+                                <li><a href="#career" class="footer_link">Career Change Advice</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Column 3: Support -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 footer_col">
+                        <h3 class="footer_heading">Support</h3>
+                        <address class="footer_contact">
+                            <div class="contact_item">
+                                <i class="fa fa-phone contact_icon" aria-hidden="true"></i>
+                                <a href="tel:+91XXXXXXXXXX" class="contact_link">+91 XXXXXXXXXX</a>
+                            </div>
+                            <div class="contact_item">
+                                <i class="fa fa-envelope contact_icon" aria-hidden="true"></i>
+                                <a href="mailto:support@resumebuilder.com"
+                                    class="contact_link">support@resumebuilder.com</a>
+                            </div>
+                            <div class="contact_item">
+                                <i class="fa fa-comments contact_icon" aria-hidden="true"></i>
+                                <a href="#chat" class="contact_link">Live Chat Available</a>
+                            </div>
+                        </address>
+                    </div>
+
+                    <!-- Column 4: Follow Us -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 footer_col">
+                        <h3 class="footer_heading">Follow Us</h3>
+                        <p class="footer_description">Stay updated with career tips and resume advice</p>
+                        <nav class="social_links" aria-label="Social Media">
+                            <ul class="social_list">
+                                <li><a href="#" class="social_link" aria-label="Follow us on Facebook"
+                                        title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link social_link--twitter"
+                                        aria-label="Follow us on Twitter" title="Twitter">𝕏</a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on LinkedIn"
+                                        title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on Instagram"
+                                        title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="social_link" aria-label="Follow us on YouTube" title="YouTube"><i
+                                            class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer section end -->
+    <!-- copyright section start -->
+    <div class="copyright_section" role="contentinfo">
+        <div class="container">
+            <div class="copyright_wrapper">
+                <p class="copyright_text">
+                    <span id="current-year">2026</span> ResumeBuilder. All Rights Reserved.
+                </p>
+                <nav class="copyright_links" aria-label="Legal">
+                    <a href="#privacy" class="copyright_link">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="#terms" class="copyright_link">Terms of Service</a>
+                    <span class="separator">|</span>
+                    <a href="#accessibility" class="copyright_link">Accessibility</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- copyright section end -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!-- javascript -->
+    <script src="validation.js"></script>
+    <script src="storage.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="contact-us.js"></script>
+    <script>
+        // Initialize auth UI on page load
+        $(document).ready(function () {
+            updateAuthUI();
+        });
+
+        // Dynamic copyright year
+        const currentYearElement = document.getElementById('current-year');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+
+    </script>
+</body>
+
+</html>
