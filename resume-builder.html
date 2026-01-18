@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="resume-style.css">
 
+
     <!-- PDF Export and Validation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
@@ -130,8 +131,11 @@
                                 <label for="location">Location</label>
                                 <input type="text" id="location">
 
-                                <label for="linkedin">LinkedIn / Portfolio URL</label>
+                                <label for="linkedin">LinkedIn URL</label>
                                 <input type="url" id="linkedin">
+
+                                <label for="github">GitHub URL</label>
+                                <input type="url" id="github">
 
                                 <h2 class="section-title">Professional Summary</h2>
                                 <textarea id="summary" rows="4"></textarea>
@@ -187,7 +191,8 @@
       <span id="preview-email"></span> |
       <span id="preview-phone"></span> |
       <span id="preview-location"></span><br>
-      <span id="preview-linkedin"></span>
+      <span id="preview-linkedin"></span> |
+      <span id="preview-github"></span>
     </div>
   </header>
 
@@ -215,8 +220,8 @@
     <h2>Achievements / Certifications</h2>
     <p id="preview-achievements"></p>
   </section>
-
 </article>
+
 
                         </div>
                     </div>
@@ -282,10 +287,19 @@
 
                     if (fieldId === 'linkedin') {
                         const url = e.target.value.trim();
-                        if (url && !Validator.isValidURL(url)) {
-                            ValidationUI.showError('linkedin', 'Please enter a valid URL');
+                        if (url && !Validator.isValidLinkedIn(url)) {
+                            ValidationUI.showError('linkedin', 'Please enter a valid LinkedIn URL');
                         } else {
                             ValidationUI.clearError('linkedin');
+                        }
+                    }
+
+                    if (fieldId === 'github') {
+                        const url = e.target.value.trim();
+                        if (url && !Validator.isValidGitHub(url)) {
+                            ValidationUI.showError('github', 'Please enter a valid GitHub URL');
+                        } else {
+                            ValidationUI.clearError('github');
                         }
                     }
 
@@ -472,6 +486,7 @@
                 setText('preview-phone', byId('phone') ? byId('phone').value : '');
                 setText('preview-location', byId('location') ? byId('location').value : '');
                 setText('preview-linkedin', byId('linkedin') ? byId('linkedin').value : '');
+                setText('preview-github', byId('github') ? byId('github').value : '');
                 setText('preview-summary', byId('summary') ? byId('summary').value : '');
 
                 const degree = byId('degree') ? byId('degree').value : '';
@@ -505,6 +520,7 @@
                     phone: document.getElementById('phone') ? document.getElementById('phone').value : '',
                     location: document.getElementById('location') ? document.getElementById('location').value : '',
                     linkedin: document.getElementById('linkedin') ? document.getElementById('linkedin').value : '',
+                    github: document.getElementById('github') ? document.getElementById('github').value : '',
                     summary: document.getElementById('summary') ? document.getElementById('summary').value : '',
                     degree: document.getElementById('degree') ? document.getElementById('degree').value : '',
                     institution: document.getElementById('institution') ? document.getElementById('institution').value : '',
@@ -532,6 +548,7 @@
                     document.getElementById('phone').value = data.phone;
                     document.getElementById('location').value = data.location;
                     document.getElementById('linkedin').value = data.linkedin;
+                    document.getElementById('github').value = data.github || '';
                     document.getElementById('summary').value = data.summary;
                     document.getElementById('degree').value = data.degree;
                     document.getElementById('institution').value = data.institution;

@@ -26,6 +26,166 @@ body {
     overflow-x: hidden;
 }
 
+/* chat bot style */
+#chat-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 90px;
+  background: #1f6f6b;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.89);
+}
+
+#chat-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 400px;
+  min-width: 280px;
+  min-height: 300px;
+  max-width: 600px;
+  max-height: 80vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  background: #e6fffb;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.chat-body {
+  padding: 10px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Resize handle styles */
+.chat-resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  cursor: nwse-resize;
+  z-index: 10;
+}
+
+.chat-resize-handle::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid #999;
+  border-top: 2px solid #999;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.chat-resize-handle:hover::before {
+  opacity: 1;
+  border-color: #1f6f6b;
+}
+
+/* Prevent text selection during resize */
+.chat-resizing {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.bot-msg, .user-msg {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.bot-msg {
+  background: #f1f5f9;
+}
+
+.user-msg {
+  background: #1f6f6b;
+  color: white;
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.chat-input button {
+  background: #1f6f6b;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+
+/* scroll up icon*/
+
+#up-btn{
+    position: fixed;
+    font-size: 20px;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+    padding: 10px 14px;
+    background-color:#69d9eb;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+/* up-btn visiblity*/
+#up-btn.show{
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0);
+}
+
+/* hover effect */
+#up-btn:hover{
+    transform: rotateY(-3);
+    box-shadow: 2px 2px 2px black;
+}
+
+@media (max-width: 768px) {
+    #scrollTopBtn {
+        display: none;
+    }
+}
+
 a {
     color: #1f1f1f;
     text-decoration: none !important;
@@ -1145,7 +1305,10 @@ button {
     width: 170px;
     margin: 0 auto;
     text-align: center;
-    padding-top: 30px;
+}
+
+.basic-bt{
+    padding-top: 25px;
 }
 
 .readmore_bt a {
@@ -1292,60 +1455,87 @@ button {
 
 /* Testimonial Cards Styling */
 .customer_cards_row {
-    padding: 40px 0;
+    padding: 60px 0;
+    background: linear-gradient(180deg, #9bb0c5, #ffffff);
 }
 
 .testimonial_card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 25px;
-    margin: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #fafafa;
+    border-radius: 16px;
+    padding: 30px 25px;
+    margin: 20px 10;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
     transition: all 0.3s ease;
     height: 100%;
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .testimonial_card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.877);
+}
+
+/* Decorative Quote Icon */
+.testimonial_card::before {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 70px;
+    color: rgba(27, 190, 169, 0.1);
+    font-family: serif;
 }
 
 .customer_icon_wrapper {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    background-color: #28454e;
-    margin: 0 auto 15px;
+    background: linear-gradient(135deg, #28544e, #3d8b82);
+    margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.966);
+    transition: transform 0.3s ease;
 }
 
 .customer_icon_wrapper i {
-    font-size: 36px;
+    font-size: 38px;
     color: #ffffff;
 }
 
 .customer_name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #28454e;
-    margin: 10px 0 5px;
+    margin: 10px 0 4px;
 }
 
 .web_text {
-    font-size: 16px;
-    color: #666;
-    margin: 0 0 15px;
+    font-size: 15px;
+    color: #220000;
+    margin-bottom: 15px;
     font-style: italic;
 }
 
 .testimonial_text {
-    font-size: 15px;
-    color: #444;
-    line-height: 1.5;
+    font-size: 16px;
+    color: #270000;
+    line-height: 1.7;
     margin: 0;
+    padding: 0 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .testimonial_card {
+        margin-bottom: 30px;
+    }
+
+    .testimonial_text {
+        font-size: 15px;
+    }
 }
 
 /* contact section start */

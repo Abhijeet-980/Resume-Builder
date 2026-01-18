@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "A modern, frontend-only resume builder with live preview and local data persistence",
   "main": "resume.js",
+  {
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "dev": "npx http-server . -p 8000 -o"
+    "build": "webpack --mode production || echo \"no build step\"",
+    "docs:lint": "markdownlint-cli2 \"**/*.md\""
   },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "markdownlint-cli2": "^1.0.0"
+  }
+}
   "keywords": [
     "resume",
     "cv",
